@@ -16,10 +16,12 @@
 ;; This package in not affiliated with weblio.jp.
 
 ;;; Code:
+(require 'request)
+(require 'dom)
 
-(unless (featurep 'request) (require 'request))
 (declare-function dom-by-class "dom")
 (declare-function dom-by-tag "dom")
+(declare-function request "request")
 
 (defun weblio-lookup-region (start end)
   "Look up selected region in weblio.jp.
@@ -45,11 +47,11 @@ Argument END end of region."
                 (let*
                     ((konkat (lambda(list)
                                (mapcar (lambda(el)
-                                         (apply 'concat el))
+                                         (apply #'concat el))
                                        list)))
                      (konkat-strings (lambda(nodes)
                                        (funcall konkat
-                                                (mapcar 'dom-strings nodes))))
+                                                (mapcar #'dom-strings nodes))))
                      (response-body data)
                      (midashi (car (dom-by-class response-body "^kijiWrp$")))
                      (header (car (funcall konkat-strings
@@ -72,6 +74,8 @@ Argument END end of region."
                                 (princ (format "%s\n\n" e)))
                               entries)))))))
   (message (format "Looking up %s ..." word)))
+
+;;; weblio.el ends here
 
 (provide 'weblio)
 ;;; weblio.el ends here
