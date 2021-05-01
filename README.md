@@ -7,4 +7,4 @@ This package provides two functions: `weblio-lookup-region` and
 
 ## In action:
 
-[![asciicast](https://asciinema.org/a/411135.svg)](https://asciinema.org/a/411135)
+[![asciicast](https://asciinema.org/a/411135.svg)](https://asciinema.org/a/411135?t=22)
