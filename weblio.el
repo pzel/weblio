@@ -3,7 +3,7 @@
 ;; Copyright (C) 2021 Simon Zelazny
 
 ;; Author: Simon Zelazny
-;; Version: 0.1
+;; Version: 0.2
 ;; Package-Requires: ((request "0.3.3") (emacs "25.1"))
 ;; Keywords: langauges, i18n
 ;; URL: https://github.com/pzel/weblio.el
@@ -16,7 +16,10 @@
 ;; This package in not affiliated with weblio.jp.
 
 ;;; Code:
-(require 'request)
+
+(unless (featurep 'request) (require 'request))
+(declare-function dom-by-class "dom")
+(declare-function dom-by-tag "dom")
 
 (defun weblio-lookup-region (start end)
   "Look up selected region in weblio.jp.
@@ -35,7 +38,8 @@ Argument END end of region."
     :parser (lambda () (libxml-parse-html-region (point) (point-max)))
     :error (cl-function
             (lambda (&key symbol-status &allow-other-keys)
-              (error (format "failed to load: %s" word))))
+              (error (format "failed to load %s with error: %s"
+                             word symbol-status))))
     :success (cl-function
               (lambda (&key data &allow-other-keys)
                 (let*
