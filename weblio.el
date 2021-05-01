@@ -75,7 +75,5 @@ Argument END end of region."
                               entries)))))))
   (message (format "Looking up %s ..." word)))
 
-;;; weblio.el ends here
-
 (provide 'weblio)
 ;;; weblio.el ends here
