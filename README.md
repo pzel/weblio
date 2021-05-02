@@ -1,6 +1,6 @@
 # weblio
 
-Quick dictionary lookup viw the weblio.jp website.
+Quick dictionary lookup via the weblio.jp website.
 
 This package provides two functions: `weblio-lookup-region` and
 `weblio-lookup-word`.
