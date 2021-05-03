@@ -3,10 +3,11 @@
 ;; Copyright (C) 2021 Simon Zelazny
 
 ;; Author: Simon Zelazny
-;; Version: 0.2
+;; Version: 0.3.2
 ;; Package-Requires: ((request "0.3.3") (emacs "25.1"))
 ;; Keywords: langauges, i18n
 ;; URL: https://github.com/pzel/weblio.el
+;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
 
@@ -40,8 +41,8 @@ Argument END end of region."
     :parser (lambda () (libxml-parse-html-region (point) (point-max)))
     :error (cl-function
             (lambda (&key symbol-status &allow-other-keys)
-              (error (format "failed to load %s with error: %s"
-                             word symbol-status))))
+              (error "Failed to load %s with error %s"
+                             word symbol-status)))
     :success (cl-function
               (lambda (&key data &allow-other-keys)
                 (let*
@@ -73,7 +74,7 @@ Argument END end of region."
                       (mapcar (lambda(e)
                                 (princ (format "%s\n\n" e)))
                               entries)))))))
-  (message (format "Looking up %s ..." word)))
+  (message  "Looking up %s ..." word))
 
 (provide 'weblio)
 ;;; weblio.el ends here
