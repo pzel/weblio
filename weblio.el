@@ -20,10 +20,7 @@
 (require 'request)
 (require 'dom)
 
-(declare-function dom-by-class "dom")
-(declare-function dom-by-tag "dom")
-(declare-function request "request")
-
+;;;###autoload
 (defun weblio-lookup-region (start end)
   "Look up selected region in weblio.jp.
 Display the results in a fresh buffer, *weblio*
@@ -33,6 +30,7 @@ Argument END end of region."
   (interactive "r")
   (weblio-lookup-word (buffer-substring start end)))
 
+;;;###autoload
 (defun weblio-lookup-word (word)
   "Look up WORD in the weblio.jp dictionary."
   (interactive "sWeblio lookup: ")
