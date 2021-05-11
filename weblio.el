@@ -3,10 +3,10 @@
 ;; Copyright (C) 2021 Simon Zelazny
 
 ;; Author: Simon Zelazny
-;; Version: 0.3.2
+;; Version: 0.3.3
 ;; Package-Requires: ((request "0.3.3") (emacs "25.1"))
 ;; Keywords: langauges, i18n
-;; URL: https://github.com/pzel/weblio.el
+;; URL: https://github.com/pzel/weblio
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 ;;; Commentary:
@@ -71,7 +71,9 @@ Argument END end of region."
                       ;; bare div.kiji's
                       (mapcar (lambda(e)
                                 (princ (format "%s\n\n" e)))
-                              entries)))))))
+                              entries))
+                    (princ "_") ;;
+                    (fit-window-to-buffer))))))
   (message  "Looking up %s ..." word))
 
 (provide 'weblio)
