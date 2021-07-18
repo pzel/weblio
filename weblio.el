@@ -3,7 +3,7 @@
 ;; Copyright (C) 2021 Simon Zelazny
 
 ;; Author: Simon Zelazny
-;; Version: 0.3.3
+;; Version: 0.3.4
 ;; Package-Requires: ((request "0.3.3") (emacs "25.1"))
 ;; Keywords: langauges, i18n
 ;; URL: https://github.com/pzel/weblio
@@ -59,7 +59,7 @@ Argument END end of region."
                                           (dom-by-tag midashi 'p)))
                      (entries (funcall konkat-strings
                                        (dom-by-class midashi "^kiji$"))))
-                  (with-output-to-temp-buffer "*weblio*"
+                  (with-output-to-temp-buffer (concat "*weblio-" word "*")
                     (princ (format "%s\n\n" header))
                     (if paragraphs
                         ;; "regular" entries are made up of <p> blocks. Display
