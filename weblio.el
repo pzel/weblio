@@ -3,7 +3,7 @@
 ;; Copyright (C) 2021-2024 Simon Zelazny
 
 ;; Author: Simon Zelazny
-;; Version: 0.4.0
+;; Version: 0.4.1
 ;; Package-Requires: ((request "0.3.3") (emacs "25.1"))
 ;; Keywords: langauges, i18n
 ;; URL: https://github.com/pzel/weblio
@@ -39,7 +39,9 @@ Argument END end of region."
       ((clean-word (seq-reduce (lambda (s ws) (string-replace ws "" s))
                                '("\t" " " "\n") word))
        (weblio-url (concat "https://www.weblio.jp/content/" clean-word))
-       (result-parser (lambda () (libxml-parse-html-region (point) (point-max))))
+       (result-parser (lambda ()
+                        (xml-remove-comments (point) (point-max))
+                        (libxml-parse-html-region (point) (point-max))))
        (error-handler (cl-function
                        (lambda (&key symbol-status &allow-other-keys)
                          (error "Failed to look up: %s with error: %s"
